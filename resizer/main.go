@@ -18,14 +18,7 @@ type Req struct {
 	Width uint   `json:"width"`
 }
 
-func main() {
-	http.HandleFunc("/", handler)
-	if err := http.ListenAndServe(":9000", nil); err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(r.Body)
 
@@ -58,4 +51,11 @@ func fetchImage(uri string) image.Image {
 	}
 
 	return img
+}
+
+func main() {
+	http.HandleFunc("/", IndexHandler)
+	if err := http.ListenAndServe(":9000", nil); err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
