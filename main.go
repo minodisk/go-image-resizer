@@ -54,8 +54,10 @@ func fetchImage(uri string) image.Image {
 }
 
 func main() {
+	port := os.Getenv("PORT")
 	http.HandleFunc("/", IndexHandler)
-	if err := http.ListenAndServe(":9000", nil); err != nil {
+	log.Printf("Start listening to %s", port)
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
 }
