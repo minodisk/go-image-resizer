@@ -1,4 +1,1 @@
 box: pjvds/golang
-deploy:
-  steps:
-    - heroku-deploy

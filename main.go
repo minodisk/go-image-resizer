@@ -36,6 +36,8 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer out.Close()
 	png.Encode(out, m)
+
+	fmt.Fprintln(w, "running")
 }
 
 func fetchImage(uri string) image.Image {
@@ -56,7 +58,7 @@ func fetchImage(uri string) image.Image {
 func main() {
 	port := os.Getenv("PORT")
 	http.HandleFunc("/", IndexHandler)
-	log.Printf("Start listening to %s", port)
+	log.Printf("Start listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
