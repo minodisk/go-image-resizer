@@ -1,0 +1,10 @@
+{
+	"ImportPath": "github.com/minodisk/go-image-resizer",
+	"GoVersion": "go1.3.3",
+	"Deps": [
+		{
+			"ImportPath": "github.com/nfnt/resize",
+			"Rev": "20c6afea041e3ac148114d9b7ad2a53b7421b561"
+		}
+	]
+}
