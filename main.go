@@ -4,8 +4,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/user"
-	"path"
 
 	"github.com/minodisk/go-image-resizer/resizer"
 	"github.com/stretchr/goweb"
@@ -14,12 +12,7 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	storage := path.Join(usr.HomeDir, ".go-image-resizer")
+	storage := ".storage"
 	os.Mkdir(storage, 0777)
 	goweb.MapStatic("/storage", storage)
 
