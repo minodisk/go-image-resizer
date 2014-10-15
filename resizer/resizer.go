@@ -17,12 +17,12 @@ import (
 )
 
 type Req struct {
-	Uri   string `json:"uri"`
+	Url   string `json:"url"`
 	Width uint   `json:"width"`
 }
 
 type Res struct {
-	Uri string `json:"uri"`
+	Url string `json:"url"`
 }
 
 type Err struct {
@@ -49,7 +49,7 @@ func (c *ResizerController) Create(ctx context.Context) error {
 	if err != nil {
 		log.Printf("%+v", err)
 		e := Err{}
-		e.Message = fmt.Sprintf("%q", err)
+		e.Message = fmt.Sprintf("%s", err)
 		buf, err := json.Marshal(e)
 		if err != nil {
 		}
@@ -59,11 +59,11 @@ func (c *ResizerController) Create(ctx context.Context) error {
 	json.Unmarshal(body, &req)
 	log.Printf("%+v", req)
 
-	imageRaw, err := fetchImage(req.Uri)
+	imageRaw, err := fetchImage(req.Url)
 	if err != nil {
 		log.Printf("%+v", err)
 		e := Err{}
-		e.Message = fmt.Sprintf("%q", err)
+		e.Message = fmt.Sprintf("%s", err)
 		buf, err := json.Marshal(e)
 		if err != nil {
 		}
@@ -75,21 +75,23 @@ func (c *ResizerController) Create(ctx context.Context) error {
 	if err != nil {
 		log.Printf("%+v", err)
 		e := Err{}
-		e.Message = fmt.Sprintf("%q", err)
-		buf, err := json.Marshal(e)
-		if err != nil {
-		}
+		e.Message = fmt.Sprintf("%s", err)
+		buf, _ := json.Marshal(e)
 		return goweb.Respond.With(ctx, http.StatusBadRequest, buf)
 	}
 	defer out.Close()
 	png.Encode(out, imageResized)
 
 	log.Printf("%+v", ctx.Path())
-	return goweb.Respond.With(ctx, 200, []byte("success"))
+	hostname, _ := os.Hostname()
+	res := Res{}
+	res.Url = "http://" + hostname + "/storage/test.png"
+	buf, _ := json.Marshal(res)
+	return goweb.Respond.With(ctx, 200, buf)
 }
 
-func fetchImage(uri string) (image.Image, error) {
-	res, err := http.Get(uri)
+func fetchImage(url string) (image.Image, error) {
+	res, err := http.Get(url)
 	if err != nil || res.StatusCode != 200 {
 		return nil, errors.New("The image doesn't exist at the URL")
 	}
