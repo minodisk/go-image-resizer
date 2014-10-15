@@ -87,6 +87,8 @@ func (c *ResizerController) Create(ctx context.Context) error {
 	res := Res{}
 	res.Url = "http://" + hostname + "/storage/test.png"
 	buf, _ := json.Marshal(res)
+
+	ctx.HttpResponseWriter().Header().Set("Content-Type", "application/json")
 	return goweb.Respond.With(ctx, 200, buf)
 }
 
