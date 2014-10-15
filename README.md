@@ -1,4 +1,4 @@
-# go-image-resizer [![wercker status](https://app.wercker.com/status/40418b2b082d7729fda3b4b0adc50961/m/master "wercker status")](https://app.wercker.com/project/bykey/40418b2b082d7729fda3b4b0adc50961)
+# go-image-resizer [![wercker status](https://app.wercker.com/status/40418b2b082d7729fda3b4b0adc50961/s "wercker status")](https://app.wercker.com/project/bykey/40418b2b082d7729fda3b4b0adc50961)
 
 Practice of processing image
 
