@@ -83,9 +83,8 @@ func (c *ResizerController) Create(ctx context.Context) error {
 	png.Encode(out, imageResized)
 
 	log.Printf("%+v", ctx.Path())
-	hostname, _ := os.Hostname()
 	res := Res{}
-	res.Url = "http://" + hostname + "/storage/test.png"
+	res.Url = "http://go-image-resizer.herokuapp.com/storage/test.png"
 	buf, _ := json.Marshal(res)
 
 	ctx.HttpResponseWriter().Header().Set("Content-Type", "application/json")

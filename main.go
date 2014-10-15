@@ -14,7 +14,6 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
-	log.Println(os.Getenv("URL"))
 	usr, err := user.Current()
 	if err != nil {
 		log.Fatal(err)
