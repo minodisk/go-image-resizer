@@ -34,9 +34,9 @@ type ResizerController struct {
 }
 
 // ReadMany reads many people.
-func (c *ResizerController) ReadMany(ctx context.Context) error {
-	return goweb.Respond.With(ctx, 200, []byte("Post JSON data"))
-}
+// func (c *ResizerController) ReadMany(ctx context.Context) error {
+// 	return goweb.Respond.With(ctx, 200, []byte("Post JSON data"))
+// }
 
 // // Read reads one person.
 // func (c *ResizerController) Read(id string, ctx context.Context) error {
